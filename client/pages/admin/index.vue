@@ -33,6 +33,8 @@
                     </div>
                 </div>
             </div>
+
+            <MobileSectionDisplay />
         </div>
     </AdminLayout>
 </template>

@@ -121,7 +121,7 @@
             </div>
 
             <div class="w-full flex items-center justify-between px-4 py-5">
-                <img class="rounded-lg w-[80px] aspect-square" :src="link.image" />
+                <img class="rounded-full w-[80px] aspect-square" :src="link.image" />
 
                 <div class="w-full pl-3">
                     <button @click="openCropper = true"
