@@ -23,7 +23,14 @@
                         ]"
                     />
 
-                    <LinkBox />
+                    <div v-for="link in fakeLink" class="mt-4">
+                        <LinkBox v-if="link" :link="link" 
+                            :selectedId="selectedInput.id"
+                            :selectedStr="selectedInput.str"
+                            @updatedInput="updatedInput"
+                            class="mt-6"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,6 +41,23 @@
 import AdminLayout from '~/layouts/AdminLayout.vue';
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
+
+const fakeLink = [
+    {
+        id: 1,
+        name: 'Phuong Anh',
+        url: 'https://www.facebook.com/ctpanh.uet',
+        image: 'https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/351921715_789018182729073_2175936877863928048_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=__JAuTXfh_IAX99_ioi&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfCv3LGz3PaLaT2gFiePCTbaSZrrKT5sKg8gR1_QzNdUeg&oe=64E12808'
+    },
+
+    {
+        id: 2,
+        name: 'Minh Hieu',
+        url: 'https://www.facebook.com/pt.hieunm',
+        image: 'https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/344386661_1743377549451566_5888987477625155345_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=nzjBF4l6cbYAX8WSPcK&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfAo2DJ6faIzPUkboIBSv3QmYveQF84QUzvGJH6_fGKezQ&oe=64E1D401'
+    },
+
+];
 
 let selectedInput = ref({ id: 0, str: '' });
 
