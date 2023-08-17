@@ -5,7 +5,7 @@ export default defineNuxtPlugin((NuxtApp) => {
     axios.defaults.withCredentials = true;
 
     return {
-        provide: {
+        provide: { 
             axios: axios
         }
     }

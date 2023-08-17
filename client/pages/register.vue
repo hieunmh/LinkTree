@@ -53,11 +53,37 @@
 <script setup>
 import AuthLayout from '~/layouts/AuthLayout.vue';
 
+import { useUserStore } from '~/stores/user';
+const userStore = useUserStore();
+
+const router = useRouter();
 
 let name = ref(null);
 let email = ref(null);
 let password = ref(null);
 let confirmPassword = ref(null);
 let errors = ref(null);
+
+const register = async () => {
+    errors.value =  null;
+    
+    try {
+        await userStore.getTokens();
+        await userStore.register(
+            name.value,
+            email.value, 
+            password.value, 
+            confirmPassword.value
+        );
+
+        await userStore.getUser();
+
+        router.push('/admin');
+
+    } catch (error) {
+        console.log(error);
+        errors.value = error.response.data.errors;
+    }
+}
 
 </script>
