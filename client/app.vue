@@ -6,7 +6,7 @@
     
     <NuxtPage/>
 
-    <!-- <UpdateLinkOverlay v-if="!isMobile && isPreviewOverlay" /> -->
+    <UpdateLinkOverlay />
     <AddLinkOverlay v-if="isMobile && updatedLinkId" />
     <PreviewOverlay v-if="!isMobile && isPreviewOverlay" />
   
