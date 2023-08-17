@@ -49,7 +49,6 @@ export const useUserStore = defineStore('user', {
             this.$state.bio = res.data.bio;
             this.$state.image = res.data.image;
       
-            this.getUserTheme();
         },
       
         async logout() {

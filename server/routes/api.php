@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group( function() {
     Route::get('/users', [UserController::class, 'index']);
     Route::patch('/users/{user}', [UserController::class, 'update']);
+
+    Route::post('user-image', [UserImageController::class, 'store']);
 });
