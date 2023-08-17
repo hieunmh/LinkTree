@@ -26,8 +26,8 @@ export const useUserStore = defineStore('user', {
 
         async login(email, password) {
             await $axios.post('/login', {
-                email: email,
-                password: password,
+              email: email,
+              password: password,
             });
         },
 

@@ -45,6 +45,8 @@ const userStore = useUserStore();
 
 const router = useRouter();
 
+definePageMeta({ middleware: 'is-logged-in' });
+
 let email = ref(null);
 let password = ref(null);
 let errors = ref(null);
@@ -54,12 +56,11 @@ const login = async () => {
 
     try {
         await userStore.getTokens();
-        await userStore.login(email, password);
+        await userStore.login(email.value, password.value);
         await userStore.getUser();
 
         router.push('/admin');
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         errors.value = error.response.data.errors;
     }

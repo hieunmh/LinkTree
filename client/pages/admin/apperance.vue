@@ -104,6 +104,8 @@ import AdminLayout from '~/layouts/AdminLayout.vue';
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 
+definePageMeta({ middleware: 'is-logged-out' });
+
 let name = ref('');
 let bio = ref('');
 let data = ref(null);
