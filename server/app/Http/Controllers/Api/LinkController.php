@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         try {
@@ -76,7 +74,7 @@ class LinkController extends Controller
             }
             $link->delete();
 
-            return response()->json('LINK DETAILS DELETED', 200);
+            return response()->json('LINK DETAILS DELETEED', 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

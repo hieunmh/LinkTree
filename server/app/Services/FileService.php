@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Nette\Utils\Image;
+use Image;
 
 class FileService
 {
@@ -29,7 +29,7 @@ class FileService
             $request->width,
             $request->height,
             $request->left,
-            $request->top
+            $request->top,
         );
 
         $name = time() . '.' . $extension;

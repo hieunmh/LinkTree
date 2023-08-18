@@ -19,8 +19,7 @@ class UserImageController extends Controller
             $user->save();
 
             return response()->json('USER IMAGE UPDATED', 200);
-        } 
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }

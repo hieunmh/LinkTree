@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\LinkController;
+use App\Http\Controllers\Api\LinkImageController;
+use App\Http\Controllers\Api\ThemeController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserImageController;
 use Illuminate\Http\Request;
@@ -21,7 +23,7 @@ Route::middleware(['auth:sanctum'])->group( function() {
     Route::get('/users', [UserController::class, 'index']);
     Route::patch('/users/{user}', [UserController::class, 'update']);
 
-    Route::post('user-image', [UserImageController::class, 'store']);
+    Route::post('/user-image', [UserImageController::class, 'store']);
 
     Route::get('links', [LinkController::class, 'index']);
     Route::post('links', [LinkController::class, 'store']);

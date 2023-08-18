@@ -44,7 +44,7 @@
                         class="rounded-full md:block hidden"
                     >
                         <img class="rounded-full min-w-[40px] w-[40px]" 
-                            src="https://picsum.photos/id/8/300/320"
+                            :src="userStore.image"
                         />
                     </button>
                 </div>  
@@ -187,7 +187,7 @@ const linksSecondaryNav = ref([
     { name: 'Links', url: '/admin', icon: 'icon-park-outline:hamburger-button' },
     { name: 'Apperance', url: '/admin/apperance', icon: 'fluent:shapes-48-regular' },
     { name: 'Analytics', url: '/', icon: 'tabler:brand-google-analytics' },
-    { name: 'More', url: '/admin/more', icon: '', img: 'https://picsum.photos/id/8/300/320' },
+    { name: 'More', url: '/admin/more', icon: '', img: userStore.image },
 ]);
 
 const linksMobile = ref([
@@ -195,7 +195,7 @@ const linksMobile = ref([
     { name: 'Apperance', url: '/admin/apperance', icon: 'fluent:shapes-48-regular', img: '' },
     { name: 'Preview', url: '/admin/preview', icon: 'icon-park-outline:preview-open', img: '' },
     { name: 'Analytics', url: '/', icon: 'tabler:brand-google-analytics', img: '' },
-    { name: 'More', url: '/admin/more', icon: '', img: 'https://picsum.photos/id/8/300/320'  },
+    { name: 'More', url: '/admin/more', icon: '', img: userStore.image  },
 ]);
 
 const curentMobilePage = () => {

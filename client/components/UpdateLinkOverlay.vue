@@ -95,8 +95,8 @@ let errors = ref(null);
 
 
 onMounted(() => {   
-    // getLinkById();
-    // userStore.hidePageOverflow(true, 'AdminPage');
+    getLinkById();
+    userStore.hidePageOverflow(true, 'AdminPage');
 
     document.addEventListener('mouseup', function(e) {
         let editNameInput = document.getElementById('editNameInputMobile')
@@ -128,11 +128,29 @@ const getLinkById = () =>{
 const close = () => updatedLinkId.value = 0;
 
 const updateLinkImage = async () => {
-    
+    try {
+        await userStore.updateLinkImage(data.value);
+        await userStore.getAllLinks();
+        getLinkById();
+        setTimeout(() => openCropper.value = false, 500);
+    } catch (error) {
+        console.log(error);
+        errors.value = error.response.data.errors;
+    }
 }
 
 const deleteLink = async () => {
-    let res = confirm('Are you sure you want to delete this link?')
+    let res = confirm('Are you sure you want to delete this link?');
+
+    try {
+        if (res) {
+            await userStore.deleteLink(updatedLinkId.value);
+            await userStore.getAllLinks();
+        }
+    } catch (error) {
+        console.log(error);
+        errors.value = error.response.data.errors;
+    }
 }
 
 const isFocused = (str) => {
@@ -150,8 +168,15 @@ const isFocused = (str) => {
 }
 
 const updateLink = useDebounce(async () => {
-    
-});
+    try {
+        await userStore.updateLink(updatedLinkId.value, name.value, url.value);
+        await userStore.getAllLinks();
+        getLinkById();
+    } catch (error) {
+        console.log(error);
+        errors.value = error.response.data.errors;
+    }
+}, 500);
 
 watch(() => name.value, () => {
     if (name.value && currentLink.value.name != name.value) {
@@ -170,7 +195,7 @@ watch(() => url.value, () => {
 watch(() => data.value, async () => await updateLinkImage());
 
 onUnmounted(() => {
-    // userStore.hidePageOverflow(false, 'AdminPage');
+    userStore.hidePageOverflow(false, 'AdminPage');
     updatedLinkId.value = 0;
 })
 

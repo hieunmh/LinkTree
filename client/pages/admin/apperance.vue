@@ -12,7 +12,7 @@
 
                         <div class="w-full bg-white rounded-3xl p-6">
                             <div class="flex items-center justify-between gap-4">
-                                <img class="rounded-full w-[90px]" src="https://picsum.photos/id/8/300/320" />
+                                <img class="rounded-full w-[90px]" :src="userStore.image" />
 
                                 <div class="w-full">
                                     <button @click="openCropper = true"
@@ -118,20 +118,38 @@ onMounted(() => {
     bio.value = userStore.bio;
 });
 
-const updateTheme  = async (themeId) => {
-
+const updateTheme = async (themeId) => {
+    try {
+        await userStore.updateTheme(themeId);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const updateUserDetails = useDebounce(async () => {
-
-});
+    try {
+        await userStore.updateUserDetails(name.value, bio.value);
+        await userStore.getUser();
+    } catch (error) {
+        console.log(error);
+        errors.value = error.response.data.errors;
+    }
+}, 1000);
 
 const bioLengthComputed = computed(() => {
     return !bio.value ? 0 : bio.value.length;
 });
 
 const updateUserImage = async () => {
-
+    try {
+        await userStore.updateUserImage(data.value);
+        await userStore.getUser();
+        setTimeout(() => openCropper.value = false, 500);
+    } catch (error) {
+        openCropper.value = false;
+        alert(error);
+        console.log(error);
+    }
 }
 
 watch(() => name.value, async () => await updateUserDetails());

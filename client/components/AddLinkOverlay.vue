@@ -38,7 +38,7 @@ import { storeToRefs } from 'pinia';
 const userStore = useUserStore();
 const { addLinkOverlay } = storeToRefs(userStore);
 
-// onMounted(() => userStore.hidePageOverflow(true, 'AdminPage'));
+onMounted(() => userStore.hidePageOverflow(true, 'AdminPage'));
 
 const close = () => addLinkOverlay.value = false;
 
@@ -47,12 +47,24 @@ let url = ref('');
 let errors = ref(null);
 
 const addLink = async () => {
+    try {
+        await userStore.addLink(name.value, url.value);
+        await userStore.getAllLinks();
 
+        setTimeout(() => {
+            name.value = '';
+            url.value = '';
+            addLinkOverlay.value = false;
+        }, 500);
+    } catch (error) {
+        console.log(error);
+        errors.value = error.response.data.errors;
+    }
 }
 
-// onUnmounted(() => {
-//     userStore.hidePageOverflow(false, 'AdminPage')
-//     addLinkOverlay.value = false
-// });
+onUnmounted(() => {
+    userStore.hidePageOverflow(false, 'AdminPage')
+    addLinkOverlay.value = false
+});
 
 </script>

@@ -166,7 +166,8 @@ const cropImage = async () => {
 }
 
 onUnmounted(() => {
-    video.value.pause();
+    // video.value.pause();
+    window.location.reload();
     video.value.currentTime = 0;
 })
 

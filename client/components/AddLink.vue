@@ -34,15 +34,29 @@
 </template>
 
 <script setup>
-
 const emit = defineEmits(['close']);
+
+import { useUserStore } from '~/stores/user';
+const userStore = useUserStore();
 
 let name = ref('');
 let url = ref('');
 let errors = ref(null);
 
 const addLink = async () => {
+    try {
+        await userStore.addLink(name.value, url.value);
+        await userStore.getAllLinks();
 
+        setTimeout(() => {
+            emit('close');
+            name.value = '';
+            url.value = '';
+        }, 500);
+    } catch (error) {
+        console.log(error);
+        errors.value = error.response.data.errors;
+    }
 }
 
 </script>
